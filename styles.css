@@ -17,8 +17,8 @@
 
   /* text */
   --text: #23211d;
-  --muted: #6c6f73;
-  --faint: #555a60;
+  --muted: #1a1a17;
+  --faint: #1a1a17;
 
   /* lines */
   --border: #d9dde1;
@@ -71,7 +71,7 @@ a { color: inherit; }
 .rail {
   width: var(--rail-w);
   flex: 0 0 var(--rail-w);
-  background: var(--bg-sidebar);
+  background: var(--surface);
   border-right: 1px solid var(--border);
   padding: 22px 18px;
   position: sticky;
@@ -398,7 +398,7 @@ a { color: inherit; }
 .explain { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 820px) { .explain { grid-template-columns: 1fr; } }
 .explain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
-.explain-item h3 { font-size: 15.5px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.explain-item h3 { font-size: 19px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .explain-item h3 .ex-tag { font-family: var(--mono); font-size: 10px; font-weight: 400; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
 .explain-item p { color: var(--text); margin-top: 8px; font-size: 14px; line-height: 1.62; }
 .explain-item .analogy { display: block; margin-top: 10px; padding-left: 13px; border-left: 3px solid var(--border-strong); color: var(--muted); font-style: italic; font-size: 13.5px; line-height: 1.55; }
