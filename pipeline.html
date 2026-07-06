@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto Engine Governance — Pipeline</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ================= TOP BAR (shared with the landing page) ================= -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-glyph" style="color:var(--ink)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+          <line x1="8" y1="8" x2="16" y2="8"></line>
+          <line x1="8" y1="12" x2="14" y2="12"></line>
+          <line x1="8" y1="16" x2="12" y2="16"></line>
+        </svg>
+      </span>
+      <div>
+        <div class="brand-name">Auto Engine Governance</div>
+        <div class="brand-sub">V1 ENGINE · V2.3 GATEWAY</div>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a href="index.html">Overview</a>
+      <a href="index.html#guarantees">Guarantees</a>
+      <a class="cta" href="pipeline.html">Pipeline &rarr;</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="rail">
+      <div class="rail-label">Pipeline</div>
+      <ul class="nav">
+        <li><a data-section="s01" href="#s01"><span class="n">01</span><span class="t">Workflow loop</span></a></li>
+        <li><a data-section="s02" href="#s02"><span class="n">02</span><span class="t">Core concepts</span></a></li>
+        <li><a data-section="s03" href="#s03"><span class="n">03</span><span class="t">CLI &amp; gateway</span></a></li>
+        <li><a data-section="s04" href="#s04"><span class="n">04</span><span class="t">Governed vs outside</span></a></li>
+        <li><a data-section="s05" href="#s05"><span class="n">05</span><span class="t">Boundary &amp; task</span></a></li>
+        <li><a data-section="s06" href="#s06"><span class="n">06</span><span class="t">Evidence report</span></a></li>
+        <li><a data-section="s07" href="#s07"><span class="n">07</span><span class="t">Audit chain</span></a></li>
+        <li><a data-section="s08" href="#s08"><span class="n">08</span><span class="t">Commercial stages</span></a></li>
+        <li><a data-section="s09" href="#s09"><span class="n">09</span><span class="t">Roadmap &amp; attestation</span></a></li>
+      </ul>
+
+      <hr class="rail-divider" />
+      <p class="rail-hint">Press <span class="key">&larr;</span> <span class="key">&rarr;</span> to move between sections.</p>
+      <p class="rail-foot">This is documentation, not a release. Boundary records describe scope; they do not create authority by themselves.</p>
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+    <main class="main">
+
+      <!-- 01 Workflow loop -->
+      <section class="section" id="s01">
+        <div class="eyebrow">Visual 01 &nbsp; Workflow loop</div>
+        <h1 class="section-title">Workflow loop</h1>
+        <p class="section-sub">How a task flows from human approval to evidence and back to a human decision.</p>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="flow-tags">
+              <span class="pill">workflow loop</span>
+              <span class="pill accent">human &rlarr; tool &rlarr; human</span>
+            </div>
+            <div class="btn-row">
+              <button class="btn" id="reset-loop">Reset</button>
+              <button class="btn dark" id="play-loop">&#9654; Play loop</button>
+            </div>
+          </div>
+
+          <div class="flow-row">
+            <div class="node dark" data-loop-node data-loop-order="0"><div class="nt"><span class="bullet">&bull;</span> Human Principal</div><div class="nd">defines / approves scope</div></div>
+            <div class="arrow">&rarr;</div>
+            <div class="node" data-loop-node data-loop-order="1"><div class="nt">Boundary Record</div><div class="nd">JSON &middot; allowed paths, commands, criteria</div></div>
+            <div class="arrow">&rarr;</div>
+            <div class="node" data-loop-node data-loop-order="2"><div class="nt">Governed Path</div><div class="nd">run-command &middot; write-file &middot; submit-done</div></div>
+          </div>
+          <div class="flow-mid"><div class="arrow">&darr;</div></div>
+          <div class="flow-row">
+            <div class="node" data-loop-node data-loop-order="5"><div class="nt">Human Principal Decision</div><div class="nd">reviews evidence &middot; decides done</div></div>
+            <div class="arrow">&larr;</div>
+            <div class="node" data-loop-node data-loop-order="4"><div class="nt">Evidence Report</div><div class="nd">coverage &middot; drift &middot; warnings</div></div>
+            <div class="arrow">&larr;</div>
+            <div class="node" data-loop-node data-loop-order="3"><div class="nt">Action Log</div><div class="nd">JSONL &middot; accepted / rejected actions</div></div>
+          </div>
+
+          <div class="callout" style="margin-top:20px">
+            <div class="lead">Human approval defines scope. Local evidence supports review.</div>
+            <div class="body">The tool records what passed through its governed path; the human at both ends owns approval and acceptance.</div>
+          </div>
+        </div>
+
+        <div class="note"><b>Accuracy note.</b> The tool records and checks; it does not approve. The Human Principal at the end of the loop decides whether the evidence supports a done claim — a positive Evidence Report is not a green light by itself.</div>
+      </section>
+
+      <!-- 02 Core concepts -->
+      <section class="section" id="s02">
+        <div class="eyebrow">Visual 02 &nbsp; Core concepts</div>
+        <h1 class="section-title">Core concepts</h1>
+        <p class="section-sub">The objects that make up the governance model and how they relate.</p>
+
+        <div class="card">
+          <div class="map-wrap">
+            <div class="map">
+              <div class="mapnode head sel" data-node
+                   data-name="Boundary Record"
+                   data-items="allowed paths|forbidden paths|allowed commands|forbidden commands|acceptance criteria|quorum / approvers|authority source"
+                   data-foot="Records a human-approved task boundary. Not an authority by itself.">
+                <div class="mn-t">Boundary Record</div>
+                <div class="mn-i">&middot; allowed paths &nbsp; &middot; allowed commands &nbsp; &middot; quorum &nbsp; + more</div>
+              </div>
+
+              <div class="mapnode" data-node
+                   data-name="Governed Action"
+                   data-items="run-command|write-file|submit-done-claim|structured denial on refusal"
+                   data-foot="Every effect flows through the governed path; the adapter never re-decides.">
+                <div class="mn-t">Governed Action</div>
+                <div class="mn-i">&middot; run-command &middot; write-file &middot; submit-done</div>
+              </div>
+
+              <div class="mapnode" data-node
+                   data-name="Action Log"
+                   data-items="accepted|rejected|failed|Merkle hash-chained|RFC 3161 anchored root"
+                   data-foot="Append-only, tamper-evident record of every governed decision.">
+                <div class="mn-t">Action Log</div>
+                <div class="mn-i">&middot; accepted / rejected &middot; hash-chained</div>
+              </div>
+
+              <div class="mapnode dim" data-node
+                   data-name="Evidence Map"
+                   data-items="criterion &rarr; evidence|evidence &rarr; action"
+                   data-foot="Optional mapping from acceptance criteria to the actions that satisfy them.">
+                <div class="mn-t">Evidence Map</div>
+                <div class="mn-i">&middot; criterion &rarr; evidence</div>
+              </div>
+
+              <div class="mapnode" data-node
+                   data-name="Evidence Report"
+                   data-items="counts|coverage|drift findings|warnings &amp; failures"
+                   data-foot="What a reviewer receives at the end of a governed task. Supports review; does not approve.">
+                <div class="mn-t">Evidence Report</div>
+                <div class="mn-i">&middot; counts &middot; coverage &middot; warnings</div>
+              </div>
+
+              <div class="mapnode" data-node
+                   data-name="Validator / Drift Check"
+                   data-items="six-check deterministic validator|non-vacuity (Deviation #4)|boundary vs log drift|mismatch findings"
+                   data-foot="Refuses a vacuous all-pass done claim; caps a verdict, never inflates it.">
+                <div class="mn-t">Validator / Drift</div>
+                <div class="mn-i">&middot; six-check &middot; non-vacuity</div>
+              </div>
+
+              <div class="mapnode" data-node
+                   data-name="Done Claim"
+                   data-items="claim statement|evidence-gated|co-signer policy|quorum-approved actions"
+                   data-foot="A completion claim, accepted only on substance through the deterministic validator.">
+                <div class="mn-t">Done Claim</div>
+                <div class="mn-i">&middot; claim statement &middot; evidence-gated</div>
+              </div>
+            </div>
+
+            <div class="selpanel">
+              <div class="sel-label">Selection</div>
+              <div class="sel-name" id="sel-name">Boundary Record</div>
+              <ul class="sel-list" id="sel-list"></ul>
+              <div class="sel-foot" id="sel-foot"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note"><b>What the map shows:</b> object relationships, not authority flow. A Boundary Record constrains accepted actions but does not block direct file edits outside the governed path — see Visual 04.</div>
+      </section>
+
+      <!-- 03 CLI & gateway -->
+      <section class="section" id="s03">
+        <div class="eyebrow">Visual 03 &nbsp; CLI &amp; gateway workflow</div>
+        <h1 class="section-title">CLI &amp; gateway workflow</h1>
+        <p class="section-sub">The v1 CLI and the V2.3 gateway both drive the same governed path — the agent requests, the engine decides.</p>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="path">aeg-gateway-mcp &middot; stdio &middot; five tools</span>
+            <span class="pill accent">possession-based broker</span>
+          </div>
+          <div class="term">
+            <div class="term-head"><span>governed session &middot; agent owns nothing</span><span>V2.3</span></div>
+            <div>$ aeg-gateway create-session --config gw.toml</div>
+            <div class="term-dim" style="color:var(--term-dim)">&nbsp;&nbsp;session token: s_9f2a… (revocable)</div>
+            <div style="margin-top:8px">&gt; run_command  pytest -q            <span class="ok">accepted</span> &middot; in workspace</div>
+            <div>&gt; write_file   src/util.py           <span class="ok">accepted</span> &middot; pre/post digests</div>
+            <div>&gt; run_command  "rm -rf /"            <span class="rej">denied</span> &middot; command_not_allowlisted</div>
+            <div>&gt; submit_done_claim                  <span class="ok">approved</span> &middot; six-check validator</div>
+            <div style="margin-top:8px">$ aeg-verify bundle evidence.tgz --offline</div>
+            <div class="intact">&#10003; bundle verifies offline — signatures, chain, anchor</div>
+          </div>
+          <div class="callout" style="margin-top:18px">
+            <div class="lead">The agent has no keys, no repo, no egress — only the request window.</div>
+            <div class="body">Five tools: run_command, write_file, read_file, list_dir, submit_done_claim. Malformed calls are rejected at the endpoint before they reach the engine.</div>
+          </div>
+        </div>
+
+        <div class="note"><b>Same envelope, two front doors.</b> The v1 <code>aeg</code> CLI and the gateway's MCP endpoint call the identical boundary &rarr; quorum &rarr; execute &rarr; audit path. The gateway makes governance unavoidable by owning what the agent cannot touch.</div>
+      </section>
+
+      <!-- 04 Unavoidable by design -->
+      <section class="section" id="s04">
+        <div class="eyebrow">Visual 04 &nbsp; Unavoidable by design</div>
+        <h1 class="section-title">Unavoidable by design</h1>
+        <p class="section-sub">Governance the agent can't opt out of — every path to action runs through the envelope.</p>
+
+        <div class="card">
+          <div class="grid2">
+            <div>
+              <div class="sub-h">Inside the envelope <span>enforced, fail-closed</span></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Every governed command &amp; write</div><div class="lb">Runs only if a signed boundary allows it; denials are recorded.</div></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Two-key approvals (quorum)</div><div class="lb">Sensitive actions need distinct verified approvers; you can't approve your own.</div></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Tamper-evident audit + anchor</div><div class="lb">Merkle-chained log, RFC 3161 time-anchored, offline-verifiable bundle.</div></div>
+            </div>
+            <div>
+              <div class="sub-h">How possession makes it unavoidable <span>the architecture</span></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">The gateway owns everything</div><div class="lb">Repo, credentials, and egress live with AEG; the agent holds none, so it must request every action.</div></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">One governed path</div><div class="lb">Commands, writes, and reads all flow through the same boundary &rarr; quorum &rarr; execute &rarr; audit path.</div></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Isolated &amp; attested</div><div class="lb">The agent runs in an isolated microVM; hardware-attested Tier-3 (TDX / SEV-SNP / CCA) extends the proof to the silicon.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note"><b>Governance by possession.</b> Because the gateway holds the repo, credentials, and egress, the agent cannot act except through the envelope — supervision is a property of the architecture, not a policy the agent can ignore.</div>
+      </section>
+
+      <!-- 05 Boundary record & the task -->
+      <section class="section" id="s05">
+        <div class="eyebrow">Visual 05 &nbsp; Boundary record &amp; the task</div>
+        <h1 class="section-title">The boundary record &amp; the task</h1>
+        <p class="section-sub">One signed record carries the task the agent must do, the scope that fences it, and what counts as done. There is no separate, ungoverned task channel.</p>
+
+        <div class="card">
+          <div class="card-head"><span class="path">boundary.signed.intoto.jsonl</span><span class="pill">cosign / Sigstore signed</span></div>
+          <div class="term">
+            <div>{</div>
+            <div>&nbsp;&nbsp;"boundary_id": "b-2026-07-06-gateway",</div>
+            <div>&nbsp;&nbsp;<span class="ok">"task"</span>: {</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;"description": "Add a CSV export endpoint with tests",</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;"rationale":&nbsp;&nbsp; "customer reporting requirement"</div>
+            <div>&nbsp;&nbsp;},</div>
+            <div>&nbsp;&nbsp;"scope": {</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;"files":&nbsp;&nbsp;&nbsp; { "allowed_paths": ["src/**","tests/**"], "forbidden_paths": [".env",".git/**"] },</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;"commands": { "allowed": ["pytest","git"], "allow_interpreters": false }</div>
+            <div>&nbsp;&nbsp;},</div>
+            <div>&nbsp;&nbsp;"approval_quorum": { "min_required": 2, "approvers": ["oidc:…","oidc:…"] },</div>
+            <div>&nbsp;&nbsp;"acceptance_criteria": [</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;{ "criterion_id": "ac-1", "text": "endpoint returns 200 with header row", "evidence_type": "test_pass" },</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;{ "criterion_id": "ac-2", "text": "docs/reports.md updated", "evidence_type": "file_exists" }</div>
+            <div>&nbsp;&nbsp;],</div>
+            <div>&nbsp;&nbsp;"done_claim_policy": { "require_anchor": true, "co_signer": true }</div>
+            <div>}</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="sub-h" style="margin-top:0">How the task reaches the agent</div>
+          <div class="grid2" style="margin-top:8px">
+            <div class="limititem" style="border-left-color:var(--green)"><div class="lh">The task lives in the boundary</div><div class="lb">The Human Principal writes <code>task.description</code> (what to do) and <code>task.rationale</code> (why) into the same predicate as the scope, then signs it.</div></div>
+            <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Scope fences the work</div><div class="lb">Allowed / forbidden paths and commands bound what the agent may touch while carrying out the task.</div></div>
+            <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Criteria define "done"</div><div class="lb">Each <code>acceptance_criteria</code> entry ties a requirement to concrete evidence — a test pass, a file, a command output, or a manual attestation.</div></div>
+            <div class="limititem"><div class="lh">No side channel</div><div class="lb">A session opens only against a verified boundary; the agent then acts through the tools, and its done-claim is validated against these criteria. The instruction and its guardrails are one signed unit.</div></div>
+          </div>
+        </div>
+
+        <div class="note"><b>Illustrative values; real fields.</b> The boundary-v1 predicate's required fields include <code>task</code>, <code>scope</code>, <code>acceptance_criteria</code>, <code>approval_quorum</code>, and <code>done_claim_policy</code> — so the task and its guardrails are one signed, tamper-evident record. Signatures resolve to real corporate identities via cosign / Sigstore OIDC.</div>
+      </section>
+
+      <!-- 06 Evidence report -->
+      <section class="section" id="s06">
+        <div class="eyebrow">Visual 06 &nbsp; Evidence report</div>
+        <h1 class="section-title">Evidence report</h1>
+        <p class="section-sub">A real combined action-log report from a governed run — what a reviewer reads.</p>
+
+        <div class="card">
+          <div class="card-head"><span class="path">.auto_engine/ &middot; combined action-log report</span><span class="pill">real governed run</span></div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+            <div><b>Combined report</b> &nbsp; <span class="mono" style="color:var(--muted);font-size:12px">2 boundaries &middot; overall status: OK</span></div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><div class="num">11</div><div class="lbl">Records</div></div>
+            <div class="stat green"><div class="num">5</div><div class="lbl">Accepted</div></div>
+            <div class="stat red"><div class="num">6</div><div class="lbl">Rejected</div></div>
+            <div class="stat amber"><div class="num">0</div><div class="lbl">Failed</div></div>
+          </div>
+
+          <div class="sub-h">Boundaries <span>grouped, ordered by executed_at</span></div>
+          <div class="crit"><span class="dot ok"></span><span class="id mono">A</span><span class="desc">a82006e9… — 1 run, all in scope</span><span class="ref">3 accepted &middot; 0 rejected</span></div>
+          <div class="crit"><span class="dot part"></span><span class="id mono">B</span><span class="desc">3ec4a51e… — 5 runs, quorum gate exercised</span><span class="ref">2 accepted &middot; 6 rejected</span></div>
+
+          <div class="covbar"><div class="seg-ok" style="width:45%"></div><div class="seg-miss" style="width:55%"></div></div>
+          <div class="covlabels"><span>5 accepted</span><span>6 rejected</span><span>0 failed</span></div>
+
+          <div class="sub-h">Rejections <span>by denial category</span></div>
+          <div class="finding"><span class="badge note">NOTE</span><span class="ftext">quorum_not_met &times; 6 — actions filed with too few approvers (e.g. "requires 2, have 0/1").</span></div>
+        </div>
+
+        <div class="note"><b>A real governed run.</b> Produced by <code>scripts/combine-logs.js</code> from live <code>.auto_engine</code> logs — every command and denial recorded, grouped by boundary, ordered by time, and independently checkable.</div>
+      </section>
+
+      <!-- 07 Audit chain -->
+      <section class="section" id="s07">
+        <div class="eyebrow">Visual 07 &nbsp; Audit chain &amp; log validation</div>
+        <h1 class="section-title">Audit chain &amp; log validation</h1>
+        <p class="section-sub">Tamper-evident logging over the action log — hash chain, external anchoring, and offline verification.</p>
+
+        <div class="card">
+          <div class="tri">
+            <div class="tricard"><div class="dots3"><i class="on"></i><i class="on"></i><i></i></div><div class="tt">Hash chain</div><div class="td">SHA-256 continuity over log records. The default; detects reorder, insertion, and deletion.</div></div>
+            <div class="tricard"><div class="dots3"><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="tt">RFC 3161 anchor</div><div class="td">An external timestamp authority signs the chain root — a third-party time proof the local host cannot forge.</div></div>
+            <div class="tricard"><div class="dots3"><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="tt">Offline bundle</div><div class="td">aeg-verify re-checks signatures, chain, and anchor on a disconnected machine.</div></div>
+          </div>
+
+          <div class="prov-wrap">
+            <div class="prov">
+              <div class="prov-h">Record types &middot; log-validate</div>
+              <div class="opt sel" data-storage="status: <b>valid</b> &mdash; hash-chain continuity checked. SHA-256 chain over records; the default, no external key material needed."><span class="rdot"></span><div><div class="ol">v1_chain_only</div><div class="ob">Chain continuity</div></div></div>
+              <div class="opt" data-storage="status: <b>valid</b> &mdash; locally verified. Deterministic v2 DSSE in-toto records produced by the engine."><span class="rdot"></span><div><div class="ol">v2_dsse</div><div class="ob">DSSE &middot; local-verified</div></div></div>
+              <div class="opt" data-storage="status: <b>unsupported</b> &mdash; requires external V1 key material; no key provider is configured by default."><span class="rdot"></span><div><div class="ol">v1_hmac</div><div class="ob">HMAC &middot; external key required</div></div></div>
+              <div class="opt" data-storage="status: <b>structural only</b> &mdash; an unsigned continuation record linking a V1 chain to the first v2 payload; not cryptographic trust transfer."><span class="rdot"></span><div><div class="ol">migration_v1_to_v2</div><div class="ob">Migration &middot; structural</div></div></div>
+              <div class="prov-foot" id="prov-foot">status: <b>valid</b> &mdash; hash-chain continuity checked. SHA-256 chain over records; the default, no external key material needed.</div>
+            </div>
+
+            <div>
+              <div class="term">
+                <div class="term-head"><span>.auto_engine/log.jsonl &middot; log-validate</span><button class="term-btn" id="tamper-btn">Simulate tamper on #4</button></div>
+                <table>
+                  <thead><tr><th>#</th><th>ACTION</th><th>PREV_HASH</th><th>HASH</th><th></th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>run-command pytest…</td><td>0000…</td><td>7a1f…b2</td><td class="ok">ok</td></tr>
+                    <tr><td>2</td><td>write-file src/util.py</td><td>7a1f…b2</td><td>c20e…91</td><td class="ok">ok</td></tr>
+                    <tr><td>3</td><td>run-command "rm -rf /" (rej)</td><td>c20e…91</td><td>e84b…1f</td><td class="ok">ok</td></tr>
+                    <tr id="log-row-4"><td>4</td><td>claim-done</td><td>e84b…1f</td><td>13af…7c</td><td class="ok">ok</td></tr>
+                  </tbody>
+                </table>
+                <div class="intact" id="chain-line">&#10003; chain intact (4 records, SHA-256)</div>
+              </div>
+              <div class="detect">
+                <span class="tag">record reorder</span><span class="tag">silent insertion</span><span class="tag">silent deletion</span>
+              </div>
+              <div class="limit-line">External RFC 3161 anchoring seals the chain root — a third-party time proof that even an attacker with log write-access cannot forge.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note"><b>Tamper-evidence you can check independently.</b> A SHA-256 hash chain over every record, an RFC 3161-anchored root, and offline bundle verification with <code>aeg-verify</code> — an auditor confirms the log was not altered without trusting the host that produced it.</div>
+      </section>
+
+      <!-- 08 Commercial stages -->
+      <section class="section" id="s08">
+        <div class="eyebrow">Visual 08 &nbsp; Commercial stages</div>
+        <h1 class="section-title">Commercial stages · V2.0 – V2.8</h1>
+        <p class="section-sub">The product pipeline on top of the hardened v1 engine — from the built gateway out to the reference deployment.</p>
+
+        <div class="card">
+          <div class="stage-flow">
+            <div class="stage done"><div class="sid">V2.0</div><div class="snm">Product definition &amp; buyer</div><div class="sst">defined</div></div>
+            <div class="stage planned"><div class="sid">V2.1</div><div class="snm">Identity socket (OIDC)</div><div class="sst">planned</div></div>
+            <div class="stage planned"><div class="sid">V2.2</div><div class="snm">Policy socket</div><div class="sst">planned</div></div>
+            <div class="stage built"><div class="sid">V2.3</div><div class="snm">Gateway — enforcement point</div><div class="sst">built · live-proven</div></div>
+            <div class="stage planned"><div class="sid">V2.4</div><div class="snm">Observability &amp; SIEM export</div><div class="sst">planned</div></div>
+            <div class="stage planned"><div class="sid">V2.5</div><div class="snm">Packaging &amp; install</div><div class="sst">planned</div></div>
+            <div class="stage planned"><div class="sid">V2.6</div><div class="snm">Operational hardening</div><div class="sst">planned</div></div>
+            <div class="stage planned"><div class="sid">V2.7</div><div class="snm">Compliance evidence kit</div><div class="sst">planned</div></div>
+            <div class="stage critical"><div class="sid">V2.8</div><div class="snm">Reference deployment (pilot)</div><div class="sst">flagship pilot</div></div>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--green)"></i> defined / built</span>
+            <span><i style="background:var(--border-strong)"></i> planned</span>
+            <span><i style="background:var(--red)"></i> flagship — the reference deployment</span>
+          </div>
+        </div>
+
+        <div class="note"><b>The V2.3 gateway is built and live-proven</b> — sessions, five governed tools, workspace containment, Tier-2 attestation, real cosign identities, and a live two-identity quorum (packets G-01…G-13). The remaining stages carry that enforcement into a buyer's identity, monitoring, packaging, and compliance systems.</div>
+      </section>
+
+      <!-- 09 Roadmap & attestation -->
+      <section class="section" id="s09">
+        <div class="eyebrow">Visual 09 &nbsp; Roadmap &amp; attestation</div>
+        <h1 class="section-title">Roadmap &amp; attestation</h1>
+        <p class="section-sub">Planned protection layers and the mandatory hardware-attestation track, pluggable at the G-11 seam.</p>
+
+        <div class="card">
+          <div class="sub-h" style="margin-top:0">Hardware-proven clean rooms <span>Tier-3 — mandatory for commercial</span></div>
+          <div class="road" style="margin-top:8px">
+            <div class="ritem mand"><span class="rid">T-01</span><span class="rtx">Intel TDX verifier<span class="mand-pill">MANDATORY</span></span></div>
+            <div class="ritem mand"><span class="rid">T-02</span><span class="rtx">AMD SEV-SNP verifier<span class="mand-pill">MANDATORY</span></span></div>
+            <div class="ritem mand"><span class="rid">T-03</span><span class="rtx">ARM CCA Realms verifier<span class="mand-pill">MANDATORY</span></span></div>
+          </div>
+
+          <div class="sub-h">Hardening layers <span>planned</span></div>
+          <div class="road" style="margin-top:8px">
+            <div class="ritem"><span class="rid">T-04</span><span class="rtx">Reproducible sandbox appliance</span></div>
+            <div class="ritem"><span class="rid">T-05</span><span class="rtx">Continuous integrity heartbeat</span></div>
+            <div class="ritem"><span class="rid">T-06</span><span class="rtx">Anti-equivocation witnessing</span></div>
+            <div class="ritem"><span class="rid">T-07</span><span class="rtx">Pinned-replay migrations</span></div>
+            <div class="ritem"><span class="rid">T-08</span><span class="rtx">Generalized external-validity checks</span></div>
+            <div class="ritem"><span class="rid">T-09</span><span class="rtx">Juror-independence self-alarm</span></div>
+            <div class="ritem"><span class="rid">T-10</span><span class="rtx">Reproducible self-builds</span></div>
+            <div class="ritem"><span class="rid">T-11</span><span class="rtx">HTTP + TLS transport for MCP</span></div>
+          </div>
+
+          <div class="sub-h">Post-release governed stories <span>after V2.8, own branch each</span></div>
+          <div class="road" style="margin-top:8px">
+            <div class="ritem"><span class="rid">PR-1</span><span class="rtx">Generic MCP tool-call governance</span></div>
+            <div class="ritem"><span class="rid">PR-2</span><span class="rtx">CI/CD deploy gate</span></div>
+            <div class="ritem"><span class="rid">PR-3</span><span class="rtx">Ops / support agent actions</span></div>
+          </div>
+        </div>
+
+        <div class="note"><b>Tier-3 is a mandatory part of the commercial product.</b> Tier-2 microVM ships at G-11 as the software-root floor; hardware-attested Tier-3 (Intel TDX, AMD SEV-SNP, ARM CCA) plugs into the same attestation seam and extends the proof down to the silicon.</div>
+      </section>
+
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

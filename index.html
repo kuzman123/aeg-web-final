@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto Engine Governance</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- top bar -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-glyph" style="color:var(--ink)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+          <line x1="8" y1="8" x2="16" y2="8"></line>
+          <line x1="8" y1="12" x2="14" y2="12"></line>
+          <line x1="8" y1="16" x2="12" y2="16"></line>
+        </svg>
+      </span>
+      <div>
+        <div class="brand-name">Auto Engine Governance</div>
+        <div class="brand-sub">V1 ENGINE · V2.3 GATEWAY</div>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a class="active" href="index.html">Overview</a>
+      <a href="index.html#guarantees">Guarantees</a>
+      <a class="cta" href="pipeline.html">Pipeline &rarr;</a>
+    </nav>
+  </header>
+
+  <div class="wrap">
+
+    <!-- hero -->
+    <section class="hero">
+      <div class="eyebrow plain">A plain-language guide to the product</div>
+      <h1>Governance an AI agent<br>can't switch off.</h1>
+      <p class="tagline">AEG — Auto Engine Governance — is a <b>fail-closed governance envelope for AI agents</b>: a supervisor that sits between an AI agent and the real world and lets it do only what it has been explicitly, verifiably authorized to do — recording every action so it can't be quietly changed later.</p>
+      <div class="cta">
+        <a class="btn dark" href="pipeline.html">Explore the pipeline &rarr;</a>
+        <a class="btn" href="#guarantees">How it works</a>
+      </div>
+    </section>
+
+    <!-- the one principle -->
+    <div class="block-title">The one principle</div>
+    <div class="card">
+      <div class="callout">
+        <div class="lead">Fail-closed: if anything is missing, unverified, tampered with, or even just uncertain, the answer is "no".</div>
+        <div class="body">A bank vault door that loses power stays <em>locked</em>, not open. Every part of AEG works the same way — permission is never assumed; it must be proven, every time.</div>
+      </div>
+    </div>
+
+    <!-- the core idea -->
+    <div class="block-title">The core idea</div>
+    <div class="card">
+      <div class="callout">
+        <div class="lead">Picture the AI agent as a skilled worker in a locked room — no keys, no tools, no outside phone line — with one service window.</div>
+        <div class="body">The agent owns nothing: not the codebase, not the passwords, not the internet connection. AEG holds all of it. To do anything at all, the agent slides a request through the window, and the gateway performs the action <b>only if the signed rulebook allows it</b>. Because the agent has no other way to act, governance can't be bypassed or switched off. In the product this is the V2.3 gateway — a <em>possession-based execution broker</em>.</div>
+      </div>
+    </div>
+
+    <!-- how each part works -->
+    <div class="block-title" id="guarantees">How each part works</div>
+    <p class="intro-lead">The technical names are kept so they line up with the product's own documents; each is explained in everyday terms, with a familiar comparison.</p>
+    <div class="explain" style="margin-top:16px">
+
+      <div class="explain-item">
+        <h3>Signed boundaries <span class="ex-tag">the rulebook</span></h3>
+        <p>Before the agent may do anything, someone with authority issues a <b>boundary</b> — a precise, signed instruction spelling out which commands may run, which files may be touched, and who may approve risky steps. The agent cannot widen it, edit it, or write its own.</p>
+        <span class="analogy">Like a notarized permission slip — a signed document with an unforgeable seal, not a friendly suggestion.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>The task itself <span class="ex-tag">where the job comes from</span></h3>
+        <p>The instruction the agent must carry out doesn't arrive on a separate, ungoverned channel. It travels <b>inside the same signed boundary</b> — a <code>task</code> field with a description (what to do) and a rationale (why) — right next to the scope that fences it and the criteria that define "done".</p>
+        <span class="analogy">Like a sealed work order that states the job, the rules, and what "finished" looks like — all on one notarized page.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>Checking the seal <span class="ex-tag">fail-closed verification</span></h3>
+        <p>Every time a boundary is used, AEG verifies its cryptographic signature. If the seal is missing, broken, or from an issuer it doesn't trust, the boundary is rejected and nothing happens.</p>
+        <span class="analogy">Like a border officer checking a passport's security features, not just glancing at the photo. No valid seal, no action.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>Two-key approvals <span class="ex-tag">quorum</span></h3>
+        <p>Actions too sensitive for one person stay blocked until the required number of distinct, verified approvers sign off. Proven live: with one approval the action was denied; with two real, independent identities it went through.</p>
+        <span class="analogy">The two-key nuclear launch — or a large wire transfer that needs two officers to both sign.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>No self-approval <span class="ex-tag">separation of duties</span></h3>
+        <p>Whoever requests an action cannot also count as one of its approvers, so the two-key rule can't be satisfied by one person wearing two hats.</p>
+        <span class="analogy">The employee who submits an expense report isn't allowed to approve it.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>The supervised hands <span class="ex-tag">governed execution</span></h3>
+        <p>Allowed commands and file writes go through AEG's governed path; the agent never touches the system directly. Anything outside the boundary is denied, and the record shows it never ran — including the common trick of hiding a forbidden action inside an innocent one ("just run this little script for me").</p>
+        <span class="analogy">A worker who must hand every request to a supervisor, who won't pass along a smuggled instruction.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>The tamper-evident logbook <span class="ex-tag">audit chain</span></h3>
+        <p>Every governed action is written to a log where each new entry carries a cryptographic fingerprint of everything before it. Alter any past page and every seal after it breaks — the tampering is obvious at once.</p>
+        <span class="analogy">The same chaining a blockchain uses, applied to an audit trail: a numbered logbook you can't quietly rewrite.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>The notary's timestamp <span class="ex-tag">RFC 3161 anchoring</span></h3>
+        <p>The sealed logbook is anchored to a trusted external timestamp authority, so no one can secretly rebuild a fake history after the fact. Proven against a real, public authority.</p>
+        <span class="analogy">An independent notary stamping the official date and time onto the record.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>The honesty inspector <span class="ex-tag">non-vacuity validator</span></h3>
+        <p>When the agent claims a job is "done," a deterministic six-check validator examines the claim and refuses a success that did nothing meaningful. An empty "everything passed" is treated as a failure, not a pass.</p>
+        <span class="analogy">A building inspector who won't sign off just because every checkbox is ticked — if no real work was verified, the sign-off is refused.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>The sealed evidence box <span class="ex-tag">offline bundles</span></h3>
+        <p>A whole governed run can be packaged into one evidence bundle an auditor opens on a completely disconnected laptop and re-verifies themselves — no trust in our servers, the vendor, or the internet. Alter one byte and verification fails and points to exactly what changed.</p>
+        <span class="analogy">A sealed evidence box anyone qualified can open and check independently.</span>
+      </div>
+
+      <div class="explain-item">
+        <h3>Real identities <span class="ex-tag">trust roots</span></h3>
+        <p>Approvers sign in with their real corporate identity, producing a signature tied to a genuine person and recorded in a public transparency log — not a test credential.</p>
+        <span class="analogy">Like "Sign in with Microsoft or Google" — the same family of technology (Certificate Transparency) that keeps website certificates honest.</span>
+      </div>
+
+    </div>
+
+    <!-- where it stands -->
+    <div class="block-title">Where it stands</div>
+    <div class="status-strip">
+      <div class="status-card ok"><div class="st-h">v1 engine</div><div class="st-s">hardened · on main</div><div class="st-p">Boundaries, quorum, separation of duties, audit chain, RFC 3161 anchoring, non-vacuity validator, and offline bundles — with captured evidence.</div></div>
+      <div class="status-card ok"><div class="st-h">V2.3 gateway</div><div class="st-s">built · live-proven</div><div class="st-p">A possession-based execution broker, proven with real cosign identities and a live two-identity quorum.</div></div>
+      <div class="status-card"><div class="st-h">V2.0 – V2.8 &amp; roadmap</div><div class="st-s">the delivery plan</div><div class="st-p">Identity, policy, SIEM, packaging, hardening, compliance, and the reference pilot — plus mandatory Tier-3 hardware attestation.</div></div>
+    </div>
+
+    <div class="note" style="margin-top:20px"><b>Built today, extending outward.</b> The hardened engine and the enforcement gateway are built; the remaining stages carry them into a regulated buyer's identity, monitoring, packaging, and compliance systems. <a href="pipeline.html" style="color:var(--text)">See the full pipeline &rarr;</a></div>
+
+  </div>
+
+  <footer class="site-foot">
+    <span>Auto Engine Governance — fail-closed governance for AI agents.</span>
+    <span><a href="pipeline.html" style="color:var(--muted)">Pipeline &rarr;</a></span>
+  </footer>
+</body>
+</html>

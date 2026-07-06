@@ -1,0 +1,15 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Node
+node_modules/
+
+# Local Claude Code tooling (launch.json holds machine-specific absolute paths)
+.claude/
+
+# Internal working files — not part of the published site
+CLAUDE.md
+memory.md
