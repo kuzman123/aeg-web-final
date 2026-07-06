@@ -5,19 +5,20 @@
 
 :root {
   /* backgrounds — light grey (was cream in the example) */
-  --bg: #eceef0;
-  --bg-sidebar: #e4e7ea;
+  --bg: #9a9da0;
+  --bg-sidebar: #93969a;
   --surface: #ffffff;
   --surface-2: #f4f5f6;
 
   /* ink / dark boxes / active nav */
   --ink: #1a1a17;
   --on-ink: #f2f1ec;
+  --darkbox: #363b41;
 
   /* text */
   --text: #23211d;
   --muted: #6c6f73;
-  --faint: #9aa0a6;
+  --faint: #555a60;
 
   /* lines */
   --border: #d9dde1;
@@ -350,6 +351,11 @@ a { color: inherit; }
 .hero h1 { font-size: 46px; font-weight: 700; letter-spacing: -1px; color: var(--ink); line-height: 1.1; max-width: none; }
 .hero .tagline { font-size: 19px; color: var(--muted); margin-top: 16px; max-width: 60ch; }
 .hero .cta { margin-top: 22px; display: flex; gap: 10px; }
+.hero-box { background: var(--darkbox); color: #fff; padding: 26px 30px; border-radius: 12px; margin: 10px 0 6px; }
+.hero-box h1 { color: #fff; }
+.hero-box .tagline { color: rgba(255,255,255,0.9); }
+.note-dark { background: var(--darkbox); border-color: var(--darkbox); color: #fff; }
+.note-dark b, .note-dark code, .note-dark a { color: #fff; }
 .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 12px; }
 @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px) { .feature-grid { grid-template-columns: 1fr; } }
