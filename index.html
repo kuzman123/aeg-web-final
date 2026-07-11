@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Auto Engine Governance</title>
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
   <!-- top bar -->
@@ -129,6 +129,12 @@
       </div>
 
       <div class="explain-item">
+        <h3>The clean-room check <span class="ex-tag">attestation-gated sessions</span></h3>
+        <p>Before a session opens, the sandbox must prove what it is running — a measured, approved environment answering a fresh, single-use challenge from the gateway. No verified attestation, no session; the door stays shut by default.</p>
+        <span class="analogy">Like competitive anti-cheat that refuses to start the game unless the environment is provably clean.</span>
+      </div>
+
+      <div class="explain-item">
         <h3>Real identities <span class="ex-tag">trust roots</span></h3>
         <p>Approvers sign in with their real corporate identity, producing a signature tied to a genuine person and recorded in a public transparency log — not a test credential.</p>
         <span class="analogy">Like "Sign in with Microsoft or Google" — the same family of technology (Certificate Transparency) that keeps website certificates honest.</span>
@@ -140,11 +146,11 @@
     <div class="block-title">Where it stands</div>
     <div class="status-strip">
       <div class="status-card ok"><div class="st-h">v1 engine</div><div class="st-s">hardened · on main</div><div class="st-p">Boundaries, quorum, separation of duties, audit chain, RFC 3161 anchoring, non-vacuity validator, and offline bundles — with captured evidence.</div></div>
-      <div class="status-card ok"><div class="st-h">V2.3 gateway</div><div class="st-s">built · live-proven</div><div class="st-p">A possession-based execution broker, proven with real cosign identities and a live two-identity quorum.</div></div>
-      <div class="status-card"><div class="st-h">V2.0 – V2.8 &amp; roadmap</div><div class="st-s">the delivery plan</div><div class="st-p">Identity, policy, SIEM, packaging, hardening, compliance, and the reference pilot — plus mandatory Tier-3 hardware attestation.</div></div>
+      <div class="status-card ok"><div class="st-h">V2.3 gateway</div><div class="st-s">live-proven with a real agent</div><div class="st-p">A real production AI agent (Claude Desktop) drove the gateway end-to-end, live: denied at zero approvals, executed after two verified identities signed — every step in the signed action log.</div></div>
+      <div class="status-card ok"><div class="st-h">Two-machine sandbox</div><div class="st-s">possession on real hardware</div><div class="st-p">The agent zone runs on a separate physical machine in a measured Firecracker microVM; the gateway holds the repo, credentials, and egress on its own machine, linked by a key-only encrypted channel.</div></div>
     </div>
 
-    <div class="note note-dark" style="margin-top:20px"><b>Built today, extending outward.</b> The hardened engine and the enforcement gateway are built; the remaining stages carry them into a regulated buyer's identity, monitoring, packaging, and compliance systems. <a href="pipeline.html" style="color:#fff">See the full pipeline &rarr;</a></div>
+    <div class="note note-dark" style="margin-top:20px"><b>Built today, extending outward.</b> The hardened engine, the enforcement gateway, and the attested two-machine sandbox are built — 1,239 automated tests green. The remaining stages (identity, policy, SIEM export, packaging, hardening, compliance, the reference pilot — plus Tier-3 hardware attestation, whose verifiers are already built) carry them into a regulated buyer's systems. <a href="pipeline.html" style="color:#fff">See the full pipeline &rarr;</a></div>
 
   </div>
 

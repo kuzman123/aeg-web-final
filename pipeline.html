@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Auto Engine Governance — Pipeline</title>
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
   <!-- ================= TOP BAR (shared with the landing page) ================= -->
@@ -203,7 +203,7 @@
           </div>
         </div>
 
-        <div class="note"><b>Same envelope, two front doors.</b> The v1 <code>aeg</code> CLI and the gateway's MCP endpoint call the identical boundary &rarr; quorum &rarr; execute &rarr; audit path. The gateway makes governance unavoidable by owning what the agent cannot touch.</div>
+        <div class="note"><b>Proven live, end-to-end, with a real agent.</b> A real production MCP client — Claude Desktop — drove the shipped gateway over a key-only encrypted channel between two physical machines: denied at zero approvals, executed the same command after two verified identities approved, every step landing in the signed action log. The v1 <code>aeg</code> CLI and the MCP endpoint call the identical boundary &rarr; quorum &rarr; execute &rarr; audit path.</div>
       </section>
 
       <!-- 04 Unavoidable by design -->
@@ -224,7 +224,7 @@
               <div class="sub-h">How possession makes it unavoidable <span>the architecture</span></div>
               <div class="limititem" style="border-left-color:var(--green)"><div class="lh">The gateway owns everything</div><div class="lb">Repo, credentials, and egress live with AEG; the agent holds none, so it must request every action.</div></div>
               <div class="limititem" style="border-left-color:var(--green)"><div class="lh">One governed path</div><div class="lb">Commands, writes, and reads all flow through the same boundary &rarr; quorum &rarr; execute &rarr; audit path.</div></div>
-              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Isolated &amp; attested</div><div class="lb">The agent runs in an isolated microVM; hardware-attested Tier-3 (TDX / SEV-SNP / CCA) extends the proof to the silicon.</div></div>
+              <div class="limititem" style="border-left-color:var(--green)"><div class="lh">Attested &amp; physically separated</div><div class="lb">Sessions open only against a verified attestation of a measured sandbox — proven on two physical machines: the agent in a Firecracker microVM booted from a measured image, the gateway holding repo, credentials, and egress on its own hardware.</div></div>
             </div>
           </div>
         </div>
@@ -277,35 +277,28 @@
       <!-- 06 Evidence report -->
       <section class="section" id="s06">
         <div class="eyebrow">Visual 06 &nbsp; Evidence report</div>
-        <h1 class="section-title">Evidence report</h1>
-        <p class="section-sub">A real combined action-log report from a governed run — what a reviewer reads.</p>
+        <h1 class="section-title">Evidence report — a real agent, live</h1>
+        <p class="section-sub">The signed action log from CD-LIVE: a production AI agent (Claude Desktop) driven through the shipped gateway, live, across two physical machines.</p>
 
         <div class="card">
-          <div class="card-head"><span class="path">.auto_engine/ &middot; combined action-log report</span><span class="pill">real governed run</span></div>
-
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px">
-            <div><b>Combined report</b> &nbsp; <span class="mono" style="color:var(--muted);font-size:12px">2 boundaries &middot; overall status: OK</span></div>
-          </div>
+          <div class="card-head"><span class="path">test-reports/sandbox-2pc/cd-live/ &middot; signed action log</span><span class="pill">live governed run &middot; real agent</span></div>
 
           <div class="stats">
-            <div class="stat"><div class="num">11</div><div class="lbl">Records</div></div>
-            <div class="stat green"><div class="num">5</div><div class="lbl">Accepted</div></div>
-            <div class="stat red"><div class="num">6</div><div class="lbl">Rejected</div></div>
-            <div class="stat amber"><div class="num">0</div><div class="lbl">Failed</div></div>
+            <div class="stat"><div class="num">15</div><div class="lbl">Signed records</div></div>
+            <div class="stat green"><div class="num">2</div><div class="lbl">Approvals to unlock</div></div>
+            <div class="stat red"><div class="num">6</div><div class="lbl">Denial categories</div></div>
+            <div class="stat green"><div class="num">0</div><div class="lbl">Ungoverned actions</div></div>
           </div>
 
-          <div class="sub-h">Boundaries <span>grouped, ordered by executed_at</span></div>
-          <div class="crit"><span class="dot ok"></span><span class="id mono">A</span><span class="desc">a82006e9… — 1 run, all in scope</span><span class="ref">3 accepted &middot; 0 rejected</span></div>
-          <div class="crit"><span class="dot part"></span><span class="id mono">B</span><span class="desc">3ec4a51e… — 5 runs, quorum gate exercised</span><span class="ref">2 accepted &middot; 6 rejected</span></div>
-
-          <div class="covbar"><div class="seg-ok" style="width:45%"></div><div class="seg-miss" style="width:55%"></div></div>
-          <div class="covlabels"><span>5 accepted</span><span>6 rejected</span><span>0 failed</span></div>
-
-          <div class="sub-h">Rejections <span>by denial category</span></div>
-          <div class="finding"><span class="badge note">NOTE</span><span class="ftext">quorum_not_met &times; 6 — actions filed with too few approvers (e.g. "requires 2, have 0/1").</span></div>
+          <div class="sub-h">What the log captured <span>in sequence, as recorded</span></div>
+          <div class="crit"><span class="dot ok"></span><span class="id mono">1</span><span class="desc">Quorum gate: the command was denied at 0 of 2 approvals — then the <b>same command</b> executed only after two verified identities signed</span><span class="ref">quorum_not_met &rarr; accepted</span></div>
+          <div class="crit"><span class="dot ok"></span><span class="id mono">2</span><span class="desc">Interpreter identity pinned by full path: <code>git status</code> and four disguised interpreter forms refused</span><span class="ref">command_not_allowlisted &times;5</span></div>
+          <div class="crit"><span class="dot ok"></span><span class="id mono">3</span><span class="desc">A file write refused under two mis-scoped boundaries — both operator setup misses caught by the gate — then accepted under the corrected boundary</span><span class="ref">patch_forbidden &middot; boundary_not_yet_valid &rarr; accepted</span></div>
+          <div class="crit"><span class="dot ok"></span><span class="id mono">4</span><span class="desc">A traversal read reaching outside the workspace refused</span><span class="ref">path escapes the workspace</span></div>
+          <div class="crit"><span class="dot ok"></span><span class="id mono">5</span><span class="desc">An empty session token refused — no badge, no service</span><span class="ref">unknown session</span></div>
         </div>
 
-        <div class="note"><b>A real governed run.</b> Produced by <code>scripts/combine-logs.js</code> from live <code>.auto_engine</code> logs — every command and denial recorded, grouped by boundary, ordered by time, and independently checkable.</div>
+        <div class="note"><b>A live exhibit, not a demo reel.</b> Every line above is a signed record from a real session: Claude Desktop driving the shipped gateway binary over a key-only encrypted channel between two physical machines. Evidence is bound write-once with a manifest and checksums, independently re-checkable.</div>
       </section>
 
       <!-- 07 Audit chain -->
@@ -360,14 +353,14 @@
       <section class="section" id="s08">
         <div class="eyebrow">Visual 08 &nbsp; Commercial stages</div>
         <h1 class="section-title">Commercial stages · V2.0 – V2.8</h1>
-        <p class="section-sub">The product pipeline on top of the hardened v1 engine — from the built gateway out to the reference deployment.</p>
+        <p class="section-sub">The product pipeline on top of the hardened v1 engine, in two tracks: the commercial line (gateway + attested Tier-2 sandbox) and the hardware-attestation line.</p>
 
         <div class="card">
           <div class="stage-flow">
             <div class="stage done"><div class="sid">V2.0</div><div class="snm">Product definition &amp; buyer</div><div class="sst">defined</div></div>
             <div class="stage planned"><div class="sid">V2.1</div><div class="snm">Identity socket (OIDC)</div><div class="sst">planned</div></div>
             <div class="stage planned"><div class="sid">V2.2</div><div class="snm">Policy socket</div><div class="sst">planned</div></div>
-            <div class="stage built"><div class="sid">V2.3</div><div class="snm">Gateway — enforcement point</div><div class="sst">built · live-proven</div></div>
+            <div class="stage built"><div class="sid">V2.3</div><div class="snm">Gateway — enforcement point</div><div class="sst">built · live-proven end-to-end</div></div>
             <div class="stage planned"><div class="sid">V2.4</div><div class="snm">Observability &amp; SIEM export</div><div class="sst">planned</div></div>
             <div class="stage planned"><div class="sid">V2.5</div><div class="snm">Packaging &amp; install</div><div class="sst">planned</div></div>
             <div class="stage planned"><div class="sid">V2.6</div><div class="snm">Operational hardening</div><div class="sst">planned</div></div>
@@ -381,21 +374,21 @@
           </div>
         </div>
 
-        <div class="note"><b>The V2.3 gateway is built and live-proven</b> — sessions, five governed tools, workspace containment, Tier-2 attestation, real cosign identities, and a live two-identity quorum (packets G-01…G-13). The remaining stages carry that enforcement into a buyer's identity, monitoring, packaging, and compliance systems.</div>
+        <div class="note"><b>Track A — the commercial line — is built and live-proven:</b> the gateway (packets G-01…G-13), attestation-gated sessions on by default, and the two-machine Tier-2 sandbox, driven end-to-end by a real production agent and hardened through four independent adversarial review rounds — full suite 1,239 tests green. <b>Track B — Tier-3 hardware attestation:</b> the Intel TDX and AMD SEV-SNP verifiers are built and fixture-proven, fail-closed at the same seam; the live silicon proof is scheduled when hardware is provisioned. The remaining stages carry the built core into a buyer's identity, monitoring, packaging, and compliance systems.</div>
       </section>
 
       <!-- 09 Roadmap & attestation -->
       <section class="section" id="s09">
         <div class="eyebrow">Visual 09 &nbsp; Roadmap &amp; attestation</div>
         <h1 class="section-title">Roadmap &amp; attestation</h1>
-        <p class="section-sub">Planned protection layers and the mandatory hardware-attestation track, pluggable at the G-11 seam.</p>
+        <p class="section-sub">The hardware-attestation track and hardening layers, pluggable at the G-11 attestation seam — the Tier-3 verifiers are already built and fixture-proven.</p>
 
         <div class="card">
-          <div class="sub-h" style="margin-top:0">Hardware-proven clean rooms <span>Tier-3 — mandatory for commercial</span></div>
+          <div class="sub-h" style="margin-top:0">Hardware-proven clean rooms <span>Tier-3 — verifiers built; silicon proof next</span></div>
           <div class="road" style="margin-top:8px">
-            <div class="ritem mand"><span class="rid">T-01</span><span class="rtx">Intel TDX verifier<span class="mand-pill">MANDATORY</span></span></div>
-            <div class="ritem mand"><span class="rid">T-02</span><span class="rtx">AMD SEV-SNP verifier<span class="mand-pill">MANDATORY</span></span></div>
-            <div class="ritem mand"><span class="rid">T-03</span><span class="rtx">ARM CCA Realms verifier<span class="mand-pill">MANDATORY</span></span></div>
+            <div class="ritem mand"><span class="rid">T-01</span><span class="rtx">Intel TDX verifier — built · fixture-proven<span class="mand-pill">MANDATORY</span></span></div>
+            <div class="ritem mand"><span class="rid">T-02</span><span class="rtx">AMD SEV-SNP verifier — built · fixture-proven<span class="mand-pill">MANDATORY</span></span></div>
+            <div class="ritem mand"><span class="rid">T-03</span><span class="rtx">ARM CCA Realms verifier — checklist drafted<span class="mand-pill">MANDATORY</span></span></div>
           </div>
 
           <div class="sub-h">Hardening layers <span>planned</span></div>
@@ -418,7 +411,7 @@
           </div>
         </div>
 
-        <div class="note"><b>Tier-3 is a mandatory part of the commercial product.</b> Tier-2 microVM ships at G-11 as the software-root floor; hardware-attested Tier-3 (Intel TDX, AMD SEV-SNP, ARM CCA) plugs into the same attestation seam and extends the proof down to the silicon.</div>
+        <div class="note"><b>Tier-3 is a mandatory part of the commercial product — and its verifiers already exist.</b> The Tier-2 measured microVM ships today as the software-root floor with attestation-gated sessions on by default; the Intel TDX and AMD SEV-SNP verifiers are built, fixture-proven, and fail-closed at the same seam, extending the proof down to the silicon when hardware is provisioned.</div>
       </section>
 
     </main>
