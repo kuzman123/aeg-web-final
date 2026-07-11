@@ -151,11 +151,11 @@ a { color: inherit; }
 
 /* footer note box */
 .note {
-  margin-top: 26px; background: #b5e0d9; border: 1px solid var(--teal);
+  margin-top: 26px; background: var(--darkbox); border: 1px solid var(--darkbox);
   border-radius: 8px; padding: 14px 16px;
-  font-family: var(--mono); font-size: 12.5px; line-height: 1.7; color: var(--muted);
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.7; color: #fff;
 }
-.note b { color: var(--text); }
+.note b, .note code, .note a { color: #fff; }
 
 /* callout with accent left border */
 .callout {
