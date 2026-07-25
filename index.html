@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Auto Engine Governance</title>
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
   <!-- top bar -->
@@ -148,9 +148,10 @@
       <div class="status-card ok"><div class="st-h">v1 engine</div><div class="st-s">hardened · on main</div><div class="st-p">Boundaries, quorum, separation of duties, audit chain, RFC 3161 anchoring, non-vacuity validator, and offline bundles — with captured evidence.</div></div>
       <div class="status-card ok"><div class="st-h">V2.3 gateway</div><div class="st-s">live-proven with a real agent</div><div class="st-p">A real production AI agent (Claude Desktop) drove the gateway end-to-end, live: denied at zero approvals, executed after two verified identities signed — every step in the signed action log.</div></div>
       <div class="status-card ok"><div class="st-h">Two-machine sandbox</div><div class="st-s">possession on real hardware</div><div class="st-p">The agent zone runs on a separate physical machine in a measured Firecracker microVM; the gateway holds the repo, credentials, and egress on its own machine, linked by a key-only encrypted channel.</div></div>
+      <div class="status-card ok"><div class="st-h">Release 2.0.0a2</div><div class="st-s">signed · CI green</div><div class="st-p">The first release is shipped: cosign-signed, reproducible from a fresh checkout, with continuous integration green across platforms and 1,438 automated tests.</div></div>
     </div>
 
-    <div class="note note-dark" style="margin-top:20px"><b>Built today, extending outward.</b> The hardened engine, the enforcement gateway, and the attested two-machine sandbox are built — 1,239 automated tests green. The remaining stages (identity, policy, SIEM export, packaging, hardening, compliance, the reference pilot — plus Tier-3 hardware attestation, whose verifiers are already built) carry them into a regulated buyer's systems. <a href="pipeline.html" style="color:#fff">See the full pipeline &rarr;</a></div>
+    <div class="note note-dark" style="margin-top:20px"><b>Built today, extending outward.</b> The hardened engine, the enforcement gateway, the attested two-machine sandbox, the identity socket (real GitHub and Google sign-ins, live), and the first signed release are built — 1,438 automated tests green. The remaining stages (policy, SIEM export, operational hardening, compliance, the reference pilot — plus Tier-3 hardware attestation, whose verifiers are already built) carry them into a regulated buyer's systems. <a href="pipeline.html" style="color:#fff">See the full pipeline &rarr;</a></div>
 
   </div>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Auto Engine Governance — Pipeline</title>
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
   <!-- ================= TOP BAR (shared with the landing page) ================= -->
@@ -358,11 +358,11 @@
         <div class="card">
           <div class="stage-flow">
             <div class="stage built"><div class="sid">V2.0</div><div class="snm">Product definition &amp; buyer</div><div class="sst">defined</div></div>
-            <div class="stage planned"><div class="sid">V2.1</div><div class="snm">Identity socket (OIDC)</div><div class="sst">planned</div></div>
+            <div class="stage built"><div class="sid">V2.1</div><div class="snm">Identity socket (OIDC)</div><div class="sst">built · live-proven</div></div>
             <div class="stage planned"><div class="sid">V2.2</div><div class="snm">Policy socket</div><div class="sst">planned</div></div>
             <div class="stage built"><div class="sid">V2.3</div><div class="snm">Gateway — enforcement point</div><div class="sst">built · live-proven end-to-end</div></div>
             <div class="stage planned"><div class="sid">V2.4</div><div class="snm">Observability &amp; SIEM export</div><div class="sst">planned</div></div>
-            <div class="stage planned"><div class="sid">V2.5</div><div class="snm">Packaging &amp; install</div><div class="sst">planned</div></div>
+            <div class="stage built"><div class="sid">V2.5</div><div class="snm">Packaging &amp; install</div><div class="sst">done · release 2.0.0a2</div></div>
             <div class="stage planned"><div class="sid">V2.6</div><div class="snm">Operational hardening</div><div class="sst">planned</div></div>
             <div class="stage planned"><div class="sid">V2.7</div><div class="snm">Compliance evidence kit</div><div class="sst">planned</div></div>
             <div class="stage critical"><div class="sid">V2.8</div><div class="snm">Reference deployment (pilot)</div><div class="sst">flagship pilot</div></div>
@@ -374,7 +374,7 @@
           </div>
         </div>
 
-        <div class="note"><b>Track A — the commercial line — is built and live-proven:</b> the gateway (packets G-01…G-13), attestation-gated sessions on by default, and the two-machine Tier-2 sandbox, driven end-to-end by a real production agent and hardened through four independent adversarial review rounds — full suite 1,239 tests green. <b>Track B — Tier-3 hardware attestation:</b> the Intel TDX and AMD SEV-SNP verifiers are built and fixture-proven, fail-closed at the same seam; the live silicon proof is scheduled when hardware is provisioned. The remaining stages carry the built core into a buyer's identity, monitoring, packaging, and compliance systems.</div>
+        <div class="note"><b>Track A — the commercial line — is built, released, and live-proven:</b> the gateway (packets G-01…G-13), attestation-gated sessions on by default, the two-machine Tier-2 sandbox, and the identity socket proven with real GitHub and Google sign-ins — driven end-to-end by a real production agent, hardened through independent adversarial reviews and a dedicated security-hardening pass (chain-genesis anchoring, session-boundary pinning, enforced trust-root pins), and shipped as the cosign-signed release 2.0.0a2 with CI green across platforms and 1,438 tests. <b>Track B — Tier-3 hardware attestation:</b> the Intel TDX and AMD SEV-SNP verifiers are built and fixture-proven, fail-closed at the same seam; the live silicon proof is scheduled when hardware is provisioned. The remaining stages (policy, SIEM export, operational hardening, compliance, the reference pilot) carry the built core into a buyer's systems.</div>
       </section>
 
       <!-- 09 Roadmap & attestation -->
